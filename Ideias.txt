@@ -1,22 +1,22 @@
 Objetivos do projeto:
 
-- Informartizar por meio de controle e registros a situação do presídio;
-- Controlar a população carcerária, gerenciando o tempo de reclusão do preso (se for viavél);
-- Oferecer trabalho para diminuição de pena e ressocializar o preso (se for viável);
-- Aumentar a pena do preso em caso de mal comportamento, como participação em brigas (se for viável);
+- Informartizar por meio de controle e registros a situaÃ§Ã£o do presÃ­dio;
+- Controlar a populaÃ§Ã£o carcerÃ¡ria, gerenciando o tempo de reclusÃ£o do preso;
+- Oferecer trabalho para diminuiÃ§Ã£o de pena e ressocializar o preso (se for viÃ¡vel);
+- Aumentar a pena do preso em caso de mal comportamento, como participaÃ§Ã£o em brigas (se for viÃ¡vel);
 
 Classes:
 
 - Data;
 - Pessoa;
 - Pena;
-- Presídio;
+- PresÃ­dio;
 - Cela;
 
 Atributos:
-Data -> dia, mes, ano, data inicial, data final;
-Pessoa -> nome, idade, data de nascimento, gênero, pena recebida, carcereiro (se for viável);
-Pena -> crime, data de início, data fim;
-Presídio -> 
-Cela ->
 
+Data -> dia, mÃªs, ano;
+Pessoa -> nome, idade, data de nascimento, gÃªnero, pena recebida, carcereiro (se for viÃ¡vel);
+Pena -> crime, data inicial, data final;
+PresÃ­dio -> cela, quantidade mÃ¡xima de presos;
+Cela -> quantidade de presos, quantidade mÃ¡xima de presos;
