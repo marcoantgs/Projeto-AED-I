@@ -1,23 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
-namespace ProjetoPresidio
+namespace Projeto_Presidio
 {
     class Data
     {
-        private int dia, mes, ano;
+        private  int dia, mes, ano;
+        private static int Dia, Mes, Ano;
 
-        public int getDia()
+        public  int  getDia()
         {
             return dia;
         }
-
-        public int getMes()
+        public  int getMes()
         {
             return mes;
         }
-
         public int getAno()
         {
             return ano;
@@ -27,7 +29,7 @@ namespace ProjetoPresidio
             dia = d;
         }
 
-        public void setMes(int m)
+        public  void setMes(int m)
         {
             mes = m;
         }
@@ -37,13 +39,54 @@ namespace ProjetoPresidio
             ano = a;
         }
 
+        public  bool setData(string data)
+        {
+            string[] dat = data.Split('/');
+            dia = int.Parse(dat[0]);
+            mes = int.Parse(dat[1]);
+            ano = int.Parse(dat[2]);
+
+           if (dia < MaxiDiasMes())
+           {
+               return true;
+           }
+            else
+            {
+                return false;
+            }
+        }
+        public static bool setDat(string data)
+        {
+            string[] dat = data.Split('/');
+            Dia = int.Parse(dat[0]);
+            Mes = int.Parse(dat[1]);
+            Ano = int.Parse(dat[2]);
+
+            if (Dia < MaxiDiasMes())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public Data(string data)
+        {
+            string[] dat = data.Split('/');
+            dia = int.Parse(dat[0]);
+            mes = int.Parse(dat[1]);
+            ano = int.Parse(dat[2]);
+        }
+
         public Data(int d, int m, int a)
         {
             dia = d;
             mes = m;
             ano = a;
         }
-
+      
         public override string ToString()
         {
             return string.Format("{0}/{1}/{2}", dia, mes, ano);
@@ -53,8 +96,12 @@ namespace ProjetoPresidio
         {
             return (ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0);
         }
+        public static bool Bissextos()
+        {
+            return (Ano % 4 == 0 && Ano % 100 != 0) || (Ano % 400 == 0);
+        }
 
-        public int MaxDiasMes()
+        public  int MaxDiasMes()
         {
             switch (mes)
             {
@@ -77,6 +124,31 @@ namespace ProjetoPresidio
                     return 0;
             }
         }
+
+        public static int MaxiDiasMes()
+        {
+            switch (Mes)
+            {
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                    return 31;
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    return 30;
+                case 2:
+                    return Bissextos() ? 29 : 28;
+                default:
+                    return 0;
+            }
+        }
+
         private void IncrementaUmDia()
         {
             if (dia < MaxDiasMes())
@@ -98,13 +170,13 @@ namespace ProjetoPresidio
             }
         }
 
-        public void Incrementa(int dias)
+        public  void Incrementa(int dias)
         {
             for (int cont = 1; cont <= dias; cont++)
                 IncrementaUmDia();
         }
 
-        public bool Maior(Data outra_data)
+        public  bool Maior(Data outra_data)
         {
             if (outra_data.ano < ano)
             {
@@ -114,23 +186,25 @@ namespace ProjetoPresidio
             else if (outra_data.ano == ano && outra_data.mes < mes)
             {
                 return true;
+
             }
 
 
-            else if (outra_data.ano == ano && outra_data.mes == mes && outra_data.dia < dia)
+            else if (outra_data.ano == ano && outra_data.ano == mes && outra_data.dia < dia)
             {
                 return true;
             }
+
             return false;
         }
 
-        public bool Igual(Data outra_data)
+        public  bool Igual(Data outra_data)
         {
             if (outra_data.ano == ano)
             {
                 if (outra_data.mes == mes)
                 {
-                    if (outra_data.dia == dia)
+                    if (outra_data.mes == mes)
                     {
                         return true;
                     }
@@ -143,7 +217,7 @@ namespace ProjetoPresidio
         {
             Data maior, menor;
 
-            if (this.Maior(outra))
+            if (Maior(outra))
             {
                 maior = this;
                 menor = new Data(outra.dia, outra.mes, outra.ano);
@@ -156,14 +230,14 @@ namespace ProjetoPresidio
 
             int dif_dias = 0;
             int dif_anos = 0;
-
+            
             while (!menor.Igual(maior))
             {
                 menor.IncrementaUmDia();
                 dif_dias++;
                 if (Bissexto() == true)
                 {
-                    if (dif_dias == 366)
+                    if(dif_dias == 366)
                     {
                         dif_anos++;
                         dif_dias = 0;
@@ -171,12 +245,14 @@ namespace ProjetoPresidio
                 }
                 else
                 {
-                    if (dif_dias == 365)
+                    if(dif_dias == 365)
                     {
                         dif_anos++;
                         dif_dias = 0;
                     }
-                }
+                    
+                   
+                } 
             }
             return dif_dias;
         }
@@ -185,7 +261,7 @@ namespace ProjetoPresidio
         {
             Data maior, menor;
 
-            if (this.Maior(outra))
+            if (Maior(outra))
             {
                 maior = this;
                 menor = new Data(outra.dia, outra.mes, outra.ano);
