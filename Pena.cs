@@ -8,37 +8,13 @@ namespace Projeto_Presidio
 {
     class Pena
     {
-        private Data Data_inicial;
-        private Data Data_final;
-        private string Crime;
+        private  Data Data_inicial;
+        private  Data Data_final;
 
-        public Data getdata_inicial()
-        {
-            return Data_inicial;
-        }
-
-       
-        public Data getdata_final()
-        {
-            return Data_inicial;
-        }
-
-        public void setdata_final(Data df)
-        {
-            Data_inicial = df;
-        }
-
-        public string getCrime()
-        {
-           return Crime;
-        }
-
-            
-        public Pena (  Data inicial, Data final , string crime)
+        public Pena(Data inicial, Data final)
         {
             Data_inicial = inicial;
             Data_final = final;
-            Crime = crime;
         }
 
         public Pena()
@@ -46,29 +22,39 @@ namespace Projeto_Presidio
 
         }
 
-        public int Periodo_dias()
+        public  Data getData_inicial()
         {
-            return this.Data_inicial.Diferenca_dias(Data_final);
+            return Data_inicial;
         }
 
-        public int Periodo_anos()
+        public  void setData_inicial(Data inicial)
         {
-            return this.Data_inicial.Diferenca_anos(Data_final);
+            Data_inicial = inicial;
+        }
+
+        public  Data getData_final()
+        {
+            return Data_final;
+        }
+
+        public  void setData_final(Data data_final)
+        {
+            Data_final = data_final;
+        }
+
+        public int Periodo_dias()
+        {
+            return Data_inicial.Diferenca_dias(Data_final);
+        }
+
+        public  int Periodo_anos()
+        {
+            return Data_inicial.Diferenca_anos(Data_final);
         }
 
         public override string ToString()
         {
-            return Crime + " / Tempo de reclusao: " + Periodo_anos() + " anos " + Periodo_dias() + " dias ";
+            return " | Tempo de reclusão: " + Periodo_anos() + " anos e " + Periodo_dias() + " dias ";
         }
-
-
-
-
-
-
-
-
-
     }
-
 }
