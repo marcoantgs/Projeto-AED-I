@@ -25,7 +25,7 @@ namespace Projeto_Presidio
 
         public static void Cadastrar_presos()
         {
-            FileStream Arq1 = new FileStream("../../lista1.txt", FileMode.Append, FileAccess.Write);
+            FileStream Arq1 = new FileStream("../../../lista1.txt", FileMode.Append, FileAccess.Write);
             StreamWriter sw1 = new StreamWriter(Arq1, Encoding.UTF8);
 
             int n1 = Pres1.Count;
@@ -36,8 +36,9 @@ namespace Projeto_Presidio
             }
 
             sw1.Close();
+            Arq1.Close();
 
-            FileStream Arq2 = new FileStream("../../lista2.txt", FileMode.Append, FileAccess.Write);
+            FileStream Arq2 = new FileStream("../../../lista2.txt", FileMode.Append, FileAccess.Write);
             StreamWriter sw2 = new StreamWriter(Arq2, Encoding.UTF8);
 
             int n2 = Pres2.Count;
@@ -48,8 +49,9 @@ namespace Projeto_Presidio
             }
 
             sw2.Close();
+            Arq2.Close();
 
-            FileStream Arq3 = new FileStream("../../lista3.txt", FileMode.Append, FileAccess.Write);
+            FileStream Arq3 = new FileStream("../../../lista3.txt", FileMode.Append, FileAccess.Write);
             StreamWriter sw3 = new StreamWriter(Arq3, Encoding.UTF8);
 
             int n3 = Pres3.Count;
@@ -61,68 +63,60 @@ namespace Projeto_Presidio
 
 
             sw3.Close();
-
+            Arq3.Close();
         }
 
         public static void Ver_Cela(int num)
         {
             if ( num == 1)
             {
-                FileStream leituraCela = new FileStream("../../lista1.txt", FileMode.Open, FileAccess.Read);
-                StreamReader lerCela = new StreamReader(leituraCela, Encoding.UTF8);
-                int contador = 0;
-                while (!lerCela.EndOfStream)
+                string line1;
+                FileStream leituraCela1 = new FileStream("../../../lista1.txt", FileMode.Open, FileAccess.Read);
+                StreamReader lerCela1 = new StreamReader(leituraCela1, Encoding.UTF8);
+                int contador1 = 0;
+                while ((line1 = lerCela1.ReadLine()) != null)
                 {
-                   
-                    contador++;
+                    Console.WriteLine(line1);
+                    contador1++;
                 }
-                Console.WriteLine(lerCela);
 
-                lerCela.Close();
+                lerCela1.Close();
+                leituraCela1.Close();
                 
             }
 
             if (num == 2)
             {
-                FileStream leituraCela = new FileStream("../../lista2.txt", FileMode.Open, FileAccess.Read);
-                StreamReader lerCela = new StreamReader(leituraCela, Encoding.UTF8);
-                int contador = 0;
-                while (!lerCela.EndOfStream)
+                string line2;
+                FileStream leituraCela2 = new FileStream("../../../lista2.txt", FileMode.Open, FileAccess.Read);
+                StreamReader lerCela2 = new StreamReader(leituraCela2, Encoding.UTF8);
+                int contador2 = 0;
+                while ((line2 = lerCela2.ReadLine()) != null)
                 {
-                    Console.WriteLine(lerCela);
-                    contador++;
+                    Console.WriteLine(line2);
+                    contador2++;
                 }
 
-                lerCela.Close();
+                lerCela2.Close();
+                leituraCela2.Close();
 
             }
 
             if (num == 3)
             {
-                FileStream leituraCela = new FileStream("../../lista3.txt", FileMode.Open, FileAccess.Read);
-                StreamReader lerCela = new StreamReader(leituraCela, Encoding.UTF8);
-                int contador = 0;
-                while (!lerCela.EndOfStream)
+                string line3;
+                FileStream leituraCela3 = new FileStream("../../../lista3.txt", FileMode.Open, FileAccess.Read);
+                StreamReader lerCela3 = new StreamReader(leituraCela3, Encoding.UTF8);
+                int contador3 = 0;
+                while ((line3 = lerCela3.ReadLine()) != null)
                 {
-                   
-                    contador++;
+                    Console.WriteLine(line3);
+                    contador3++;
                 }
-                Console.WriteLine(lerCela);
 
-                lerCela.Close();
-
+                lerCela3.Close();
+                leituraCela3.Close();
             }
-
-
-
         }
-
-
-
-
-
-
-
-
     }
 }
