@@ -3,40 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace Projeto_Presidio
 {
-    class Presidiario
+    class Presidiario:Pessoas
     {
-        private static string Nome;
-        private static int Idade;
+        private  string Nome;
         private static Data Datanascimento;
-        private static string Crime;
-        private static Pena Tempo_reclusao;
-        private static int Cpf_preso;
-        private static int Idade_nascimento;
+        private  int Crime;
+        private  int Periodo_Reclusao;
+        private  string Cpf_preso;
+        private  int Idade;
 
-        public Presidiario(string nome, int idade, Data datanascimento, Pena tempo, int numcpf, string crime)
-        {
-            Nome = nome;
-            Idade = idade;
-            Datanascimento = datanascimento;
-            Tempo_reclusao = tempo;
-            Cpf_preso = numcpf;
-            Crime = crime;
-        }
+                   
         public Presidiario()
         {
 
         }
-        public static string getNome()
+        public  string getNome()
         {
             return Nome;
         }
 
-        public static bool setNome(string nome)
+        public  bool setNome(string nome)
         {
-           
+
             if (nome.Length >= 3)
             {
                 Nome = nome;
@@ -48,22 +41,22 @@ namespace Projeto_Presidio
             }
         }
 
-        public static int getIdade()
+        public int getIdade()
         {
             return Idade;
         }
-
-        public static bool setIdade(int idade)
+        public void setIdade(int num)
         {
-            if (idade == Idade_nascimento)
-            {
-                Idade = idade;
-                return true;
-            }
-            else
-            {
-                return false; 
-            }
+            Idade = num;
+        }
+
+        public int getPeriodoReclusao()
+        {
+            return Periodo_Reclusao;
+        }
+        public void setPeriodoReclusao(int periodo)
+        {
+           Periodo_Reclusao = periodo;
         }
 
         public static Data getData_nascimento()
@@ -71,119 +64,104 @@ namespace Projeto_Presidio
             return Datanascimento;
         }
 
-        public static bool setData_nascimento(Data nascimento)
+       
+        public bool setData_nascimento(Data nascimento)
         {
-            Idade_nascimento = DateTime.Today.Year - nascimento.getAno();
+            Idade = DateTime.Today.Year - nascimento.getAno();
             if (DateTime.Today.Month < nascimento.getMes() || (DateTime.Today.Month == nascimento.getMes() && DateTime.Today.Day < nascimento.getDia()))
             {
-                Idade--;
+                Idade --;
             }
 
-            if (Idade_nascimento < 18)
+            if (Idade < 18)
             {
                 return false;
             }
             else
             {
+
                 Datanascimento = nascimento;
                 return true;
             }
         }
 
-        public static string getCrime()
+        public int getCrime()
         {
             return Crime;
         }
 
-        public static bool setCrime(string crime)
+        public bool setCrime(int crime)
         {
             switch (crime)
             {
-                case "Roubo":
-                case "Assalto":                
-                case "Sequestro":
-                case "Assassinato":            
-                case "Pedofilia":
-                case "Feminicídio":
+                case 1:
+                case 2:
+                case 3:
                     Crime = crime;
-                    return true;               
+                    return true;
                 default:
                     break;
             }
 
             return false;
         }
-        
-        public static Pena getTempo_reclusao()
-        {
-            return Tempo_reclusao;
-        }
 
-        public static void setTempo_reclusao(Pena tempo)
-        {
-            Tempo_reclusao = tempo;
-        }
-
-        public static int getcpf_preso()
+       
+        public string getcpf_preso()
         {
             return Cpf_preso;
         }
 
-        public static bool setcpf_preso(int num)
+        public void setCpf_preso(string n)
         {
-            if (num > 4)
+            Cpf_preso = n;
+        }
+       
+        public bool verificacpf_preso(string num)
+        {
+            List<string> ID = new List<string>();
+
+            string[] ListaID= File.ReadAllLines("../../listadeID.txt");
+            
+            for (int i = 0; i < ListaID.Length; i++)
             {
-                Cpf_preso = num;
+                ID.Add(ListaID[i]);
+
+
+            }          
+            
+            if (!ID.Contains(num))
+            {
+                FileStream Arq1 = new FileStream("../../listadeID.txt", FileMode.Append, FileAccess.Write);
+                StreamWriter sw1 = new StreamWriter(Arq1, Encoding.UTF8);
+
+                sw1.WriteLine(num);
+
+                sw1.Close();
+                Arq1.Close();
+
+                setCpf_preso(num);                
                 return true;
             }
-            else
-            {
-                return false;
-            }
-            
+
+            return false;
+
+
+
         }
+       public string Trasformar()
+       {
+            return " Nome: " + Nome + " | Data nascimento: " + Datanascimento + " | Idade: " + Idade +
+                " | ID Detento: " + Cpf_preso + " | Tempo de reclusao: " + Periodo_Reclusao;
+       }
+       
 
-        public static Presidiario Tipo_crime1()
-        {
-            Presidiario Preso1 = null;
-            if (getCrime() == "Roubo" || getCrime() == "Assalto")
-            {
-                Preso1 = new Presidiario(Nome, Idade, Datanascimento, Tempo_reclusao, Cpf_preso, Crime);
-               
-            }
-
-            return Preso1; ;
-        }
-
-        public static Presidiario Tipo_crime2()
-        {
-            Presidiario Preso1 = null;
-            if (getCrime() == "Assassinato"|| getCrime() == "Sequestro")
-            {
-                 Preso1 = new Presidiario(Nome, Idade, Datanascimento, Tempo_reclusao,
-                                                     Cpf_preso, Crime);
-            }
-
-            return Preso1;
-        }
-        public static Presidiario Tipo_crime3()
-        {
-            Presidiario Preso1 = null;
-            if (getCrime() == "Pedofilia" || getCrime() == "Feminicídio")
-            {    
-            
-                Preso1 = new Presidiario(Nome, Idade, Datanascimento, Tempo_reclusao,
-                                         Cpf_preso, Crime);
-                
-            }
-
-            return Preso1;
-        }
+       
 
         public override string ToString()
         {
-            return " Nome: "  + Nome + " | Idade: " + Idade + " | Data de nascimento: " + Datanascimento +
-                " | CPF do preso " + Cpf_preso + " | Crime cometido: " + Crime + Tempo_reclusao;
+            return  Nome + " | " + Datanascimento + " | " + Idade +
+                " | " + Cpf_preso + "|" + Periodo_Reclusao;
         }
     }
 }
