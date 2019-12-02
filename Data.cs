@@ -10,7 +10,11 @@ namespace Projeto_Presidio
     class Data
     {
         private  int dia, mes, ano;
-        private static int Dia, Mes, Ano;
+       
+        public Data()
+        {
+
+        }
 
         public  int  getDia()
         {
@@ -46,7 +50,7 @@ namespace Projeto_Presidio
             mes = int.Parse(dat[1]);
             ano = int.Parse(dat[2]);
 
-           if (dia < MaxiDiasMes())
+           if (dia < MaxDiasMes())
            {
                return true;
            }
@@ -55,22 +59,7 @@ namespace Projeto_Presidio
                 return false;
             }
         }
-        public static bool setDat(string data)
-        {
-            string[] dat = data.Split('/');
-            Dia = int.Parse(dat[0]);
-            Mes = int.Parse(dat[1]);
-            Ano = int.Parse(dat[2]);
-
-            if (Dia < MaxiDiasMes())
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+      
 
         public Data(string data)
         {
@@ -78,7 +67,10 @@ namespace Projeto_Presidio
             dia = int.Parse(dat[0]);
             mes = int.Parse(dat[1]);
             ano = int.Parse(dat[2]);
+            
+
         }
+
 
         public Data(int d, int m, int a)
         {
@@ -86,6 +78,7 @@ namespace Projeto_Presidio
             mes = m;
             ano = a;
         }
+
       
         public override string ToString()
         {
@@ -96,10 +89,7 @@ namespace Projeto_Presidio
         {
             return (ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0);
         }
-        public static bool Bissextos()
-        {
-            return (Ano % 4 == 0 && Ano % 100 != 0) || (Ano % 400 == 0);
-        }
+      
 
         public  int MaxDiasMes()
         {
@@ -125,29 +115,7 @@ namespace Projeto_Presidio
             }
         }
 
-        public static int MaxiDiasMes()
-        {
-            switch (Mes)
-            {
-                case 1:
-                case 3:
-                case 5:
-                case 7:
-                case 8:
-                case 10:
-                case 12:
-                    return 31;
-                case 4:
-                case 6:
-                case 9:
-                case 11:
-                    return 30;
-                case 2:
-                    return Bissextos() ? 29 : 28;
-                default:
-                    return 0;
-            }
-        }
+        
 
         private void IncrementaUmDia()
         {
@@ -196,7 +164,12 @@ namespace Projeto_Presidio
             }
 
             return false;
+
+
+
         }
+
+       
 
         public  bool Igual(Data outra_data)
         {
@@ -208,6 +181,7 @@ namespace Projeto_Presidio
                     {
                         return true;
                     }
+
                 }
             }
             return false;
@@ -253,8 +227,15 @@ namespace Projeto_Presidio
                     
                    
                 } 
+                    
+                
+               
             }
             return dif_dias;
+
+
+                     
+           
         }
 
         public int Diferenca_anos(Data outra)
@@ -295,9 +276,16 @@ namespace Projeto_Presidio
                         dif_anos++;
                         dif_dias = 0;
                     }
+
+
                 }
+
             }
             return dif_anos;
+
         }
+
+       
+
     }
 }
