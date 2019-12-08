@@ -54,10 +54,10 @@ namespace Projeto_Presidio
                 P22.setPeriodoDeReclusao(Convert.ToInt32(aux[4]));
                 TodosPresos.Add(P22);
             }
-
+            Console.WriteLine();
             foreach (var list in TodosPresos)
             {
-                Console.WriteLine(list);
+                Console.WriteLine(list.Trasformar());
             }
 
             Console.WriteLine();
@@ -67,10 +67,11 @@ namespace Projeto_Presidio
             Presidiario P1;
             P1 = TodosPresos.Find(y => y.getId().Contains(id));
 
-            Console.WriteLine(P1);
+            Console.WriteLine();
 
-            Console.WriteLine("Desejar acrescentar ou reduzir anos da pena do preso?");
-            Console.WriteLine("| 1 - Acrescentar anos; 2 - Reduzir anos |");
+            Console.WriteLine("| 1 - Acrescentar anos de reclusão; 2 - Reduzir anos de reclusão;" +
+                               " 3 - Preso Transferido retira-lo do sistema |");
+            Console.WriteLine();
             Console.Write("> Digite a opção desejada: ");
             int num1 = int.Parse(Console.ReadLine());
             Console.WriteLine();
@@ -129,6 +130,15 @@ namespace Projeto_Presidio
                 }
                 Console.WriteLine(P1);
                 AtualizarCelaMasculina1(TodosPresos);
+            }
+
+            else if (num1 == 3)
+            {
+                ArquivarPresoTransferido(P1);
+                TodosPresos.Remove(P1);
+                AtualizarCelaMasculina1(TodosPresos);
+                Console.WriteLine(" Preso removido do sistema");
+
             }
         }
         public void GerenciarCelaMasculina2()
@@ -151,7 +161,7 @@ namespace Projeto_Presidio
 
             foreach (var lista in TodosPresos)
             {
-                Console.WriteLine(lista);
+                Console.WriteLine(lista.Trasformar());
             }
 
             Console.WriteLine();
@@ -161,10 +171,12 @@ namespace Projeto_Presidio
             Presidiario P1;
             P1 = TodosPresos.Find(y => y.getId().Contains(id));
 
-            Console.WriteLine(P1);
+            Console.WriteLine();
 
-            Console.WriteLine("Desejar acrescentar ou reduzir anos da pena do preso?");
-            Console.WriteLine("| 1 - Acrescentar anos; 2 - Reduzir anos |");
+            Console.WriteLine("| 1 - Acrescentar anos de reclusão; 2 - Reduzir anos de reclusão; +" +
+                               " 3 - Preso Transferido retira-lo do sistema |");
+
+            Console.WriteLine();
             Console.Write("> Digite a opção desejada: ");
             int num1 = int.Parse(Console.ReadLine());
             if (num1 == 1)
@@ -219,6 +231,14 @@ namespace Projeto_Presidio
                 }
                 Console.WriteLine(P1);
                 AtualizarCelaMasculina2(TodosPresos);
+            }
+
+            else if (num1 == 3)
+            {
+                ArquivarPresoTransferido(P1);
+                TodosPresos.Remove(P1);
+                AtualizarCelaMasculina2(TodosPresos);
+                Console.WriteLine(" Preso removido do sistema");
             }
         }
 
@@ -240,9 +260,10 @@ namespace Projeto_Presidio
                 P22.setPeriodoDeReclusao(Convert.ToInt32(aux[4]));
                 TodosPresos.Add(P22);
             }
+            Console.WriteLine();
             foreach (var lista in TodosPresos)
             {
-                Console.WriteLine(lista);
+                Console.WriteLine(lista.Trasformar());
             }
 
             Console.WriteLine();
@@ -252,10 +273,11 @@ namespace Projeto_Presidio
             Presidiario P1;
             P1 = TodosPresos.Find(y => y.getId().Contains(id));
 
-            Console.WriteLine(P1);
+            Console.WriteLine();
 
-            Console.WriteLine("Desejar acrescentar ou reduzir anos da pena do preso?");
-            Console.WriteLine("| 1 - Acrescentar anos; 2 - Reduzir anos |");
+            Console.WriteLine("| 1 - Acrescentar anos de reclusão; 2 - Reduzir anos de reclusão; " +
+                               " 3 - Preso Transferido, retira-lo do sistema |");
+            Console.WriteLine();
             Console.Write("> Digite a opção desejada: ");
             int num1 = int.Parse(Console.ReadLine());
             if (num1 == 1)
@@ -311,11 +333,21 @@ namespace Projeto_Presidio
                 Console.WriteLine(P1);
                 AtualizarCelaMasculina3(TodosPresos);
             }
+
+            else if (num1 == 3)
+            {
+                ArquivarPresoTransferido(P1);
+                TodosPresos.Remove(P1);
+                AtualizarCelaMasculina3(TodosPresos);
+                Console.WriteLine(" Preso removido do sistema");
+            }
+
+
         }
 
         public void AtualizarCelaMasculina1(List<Presidiario> det)
         {
-            FileStream Arq1 = new FileStream("../../MasculinaSimples.txt", FileMode.Open, FileAccess.Write);
+            FileStream Arq1 = new FileStream("../../MasculinaSimples.txt", FileMode.Create, FileAccess.Write);
             StreamWriter sw1 = new StreamWriter(Arq1, Encoding.UTF8);
 
             foreach (Presidiario lista in det)
@@ -329,7 +361,7 @@ namespace Projeto_Presidio
 
         public void AtualizarCelaMasculina2(List<Presidiario> det)
         {
-            FileStream Arq1 = new FileStream("../../MasculinaQualificado.txt", FileMode.Open, FileAccess.Write);
+            FileStream Arq1 = new FileStream("../../MasculinaQualificado.txt", FileMode.Create, FileAccess.Write);
             StreamWriter sw1 = new StreamWriter(Arq1, Encoding.UTF8);
 
             foreach (Presidiario lista in det)
@@ -343,7 +375,7 @@ namespace Projeto_Presidio
 
         public void AtualizarCelaMasculina3(List<Presidiario> det)
         {
-            FileStream Arq1 = new FileStream("../../MasculinaHediondo.txt", FileMode.Open, FileAccess.Write);
+            FileStream Arq1 = new FileStream("../../MasculinaHediondo.txt", FileMode.Create, FileAccess.Write);
             StreamWriter sw1 = new StreamWriter(Arq1, Encoding.UTF8);
 
             foreach (Presidiario lista in det)
@@ -482,10 +514,10 @@ namespace Projeto_Presidio
                 P22.setPeriodoDeReclusao(Convert.ToInt32(aux[4]));
                 TodosPresos.Add(P22);
             }
-
+            Console.WriteLine();
             foreach (var list in TodosPresos)
             {
-                Console.WriteLine(list);
+                Console.WriteLine(list.Trasformar());
             }
 
             Console.WriteLine();
@@ -495,10 +527,11 @@ namespace Projeto_Presidio
             Presidiario P1;
             P1 = TodosPresos.Find(y => y.getId().Contains(id));
 
-            Console.WriteLine(P1);
+            Console.WriteLine();
 
-            Console.WriteLine("Desejar acrescentar ou reduzir anos da pena do preso?");
-            Console.WriteLine("| 1 - Acrescentar anos; 2 - Reduzir anos |");
+            Console.WriteLine("| 1 - Acrescentar anos de reclusão; 2 - Reduzir anos de reclusão; +" +
+                               " 3 - Preso Transferido retira-lo do sistema |");
+            Console.WriteLine();
             Console.Write("> Digite a opção desejada: ");
             int num1 = int.Parse(Console.ReadLine());
             Console.WriteLine();
@@ -557,6 +590,14 @@ namespace Projeto_Presidio
                 }
                 Console.WriteLine(P1);
                 AtualizarCelaFeminina1(TodosPresos);
+            }
+
+            else if (num1 == 3)
+            {
+                ArquivarPresoTransferido(P1);
+                TodosPresos.Remove(P1);
+                AtualizarCelaFeminina1(TodosPresos);
+                Console.WriteLine(" Preso removido do sistema");
             }
         }
         public void GerenciarCelaFeminina2()
@@ -576,10 +617,10 @@ namespace Projeto_Presidio
                 P22.setPeriodoDeReclusao(Convert.ToInt32(aux[4]));
                 TodosPresos.Add(P22);
             }
-
+            Console.WriteLine();
             foreach (var lista in TodosPresos)
             {
-                Console.WriteLine(lista);
+                Console.WriteLine(lista.Trasformar());
             }
 
             Console.WriteLine();
@@ -589,10 +630,12 @@ namespace Projeto_Presidio
             Presidiario P1;
             P1 = TodosPresos.Find(y => y.getId().Contains(id));
 
-            Console.WriteLine(P1);
+            Console.WriteLine();
 
-            Console.WriteLine("Desejar acrescentar ou reduzir anos da pena do preso?");
-            Console.WriteLine("| 1 - Acrescentar anos; 2 - Reduzir anos |");
+
+            Console.WriteLine("| 1 - Acrescentar anos de reclusão; 2 - Reduzir anos de reclusão; +" +
+                               " 3 - Preso Transferido retira-lo do sistema |");
+            Console.WriteLine();
             Console.Write("> Digite a opção desejada: ");
             int num1 = int.Parse(Console.ReadLine());
             if (num1 == 1)
@@ -647,6 +690,13 @@ namespace Projeto_Presidio
                 }
                 Console.WriteLine(P1);
                 AtualizarCelaFeminina2(TodosPresos);
+            }
+            else if (num1 == 3)
+            {
+                ArquivarPresoTransferido(P1);
+                TodosPresos.Remove(P1);
+                AtualizarCelaFeminina2(TodosPresos);
+                Console.WriteLine(" Preso removido do sistema");
             }
         }
 
@@ -668,9 +718,10 @@ namespace Projeto_Presidio
                 P22.setPeriodoDeReclusao(Convert.ToInt32(aux[4]));
                 TodosPresos.Add(P22);
             }
+            Console.WriteLine();
             foreach (var lista in TodosPresos)
             {
-                Console.WriteLine(lista);
+                Console.WriteLine(lista.Trasformar());
             }
 
             Console.WriteLine();
@@ -680,10 +731,11 @@ namespace Projeto_Presidio
             Presidiario P1;
             P1 = TodosPresos.Find(y => y.getId().Contains(id));
 
-            Console.WriteLine(P1);
+            Console.WriteLine();
 
-            Console.WriteLine("Desejar acrescentar ou reduzir anos da pena do preso?");
-            Console.WriteLine("| 1 - Acrescentar anos; 2 - Reduzir anos |");
+            Console.WriteLine("| 1 - Acrescentar anos de reclusão; 2 - Reduzir anos de reclusão; +" +
+                               " 3 - Preso Transferido retira-lo do sistema |");
+            Console.WriteLine();
             Console.Write("> Digite a opção desejada: ");
             int num1 = int.Parse(Console.ReadLine());
             if (num1 == 1)
@@ -739,11 +791,19 @@ namespace Projeto_Presidio
                 Console.WriteLine(P1);
                 AtualizarCelaFeminina3(TodosPresos);
             }
+
+            else if (num1 == 3)
+            {
+                ArquivarPresoTransferido(P1);
+                TodosPresos.Remove(P1);
+                AtualizarCelaFeminina3(TodosPresos);
+                Console.WriteLine(" Preso removido do sistema;");
+            }
         }
 
         public void AtualizarCelaFeminina1(List<Presidiario> det)
         {
-            FileStream Arq1 = new FileStream("../../FemininaSimples.txt", FileMode.Open, FileAccess.Write);
+            FileStream Arq1 = new FileStream("../../FemininaSimples.txt", FileMode.Create, FileAccess.Write);
             StreamWriter sw1 = new StreamWriter(Arq1, Encoding.UTF8);
 
             foreach (Presidiario lista in det)
@@ -757,7 +817,7 @@ namespace Projeto_Presidio
 
         public void AtualizarCelaFeminina2(List<Presidiario> det)
         {
-            FileStream Arq1 = new FileStream("../../FemininaQualificado.txt", FileMode.Open, FileAccess.Write);
+            FileStream Arq1 = new FileStream("../../FemininaQualificado.txt", FileMode.Create, FileAccess.Write);
             StreamWriter sw1 = new StreamWriter(Arq1, Encoding.UTF8);
 
             foreach (Presidiario lista in det)
@@ -771,7 +831,7 @@ namespace Projeto_Presidio
 
         public void AtualizarCelaFeminina3(List<Presidiario> det)
         {
-            FileStream Arq1 = new FileStream("../../FemininaHediondo.txt", FileMode.Open, FileAccess.Write);
+            FileStream Arq1 = new FileStream("../../FemininaHediondo.txt", FileMode.Create, FileAccess.Write);
             StreamWriter sw1 = new StreamWriter(Arq1, Encoding.UTF8);
 
             foreach (Presidiario lista in det)
@@ -902,16 +962,16 @@ namespace Projeto_Presidio
             {
                 sw1.WriteLine(i);
             }
-                       
+
             sw1.Close();
             Arq1.Close();
 
         }
 
-        public  void GerenciarCarcereiros()
+        public void GerenciarCarcereiros()
         {
-            
-            
+
+
             List<Carcereiro> TodosCarcereiros = new List<Carcereiro>();
 
             Data t = new Data();
@@ -931,11 +991,11 @@ namespace Projeto_Presidio
             }
             foreach (var lista in TodosCarcereiros)
             {
-                Console.WriteLine(lista);
+                Console.WriteLine(lista.RelatorioCarcereiro());
             }
 
-              
-                          
+
+
             Console.WriteLine();
             Console.Write("> Digite o ID do Carcereiro: ");
             string id = Console.ReadLine();
@@ -946,7 +1006,8 @@ namespace Projeto_Presidio
             Console.WriteLine(P1);
 
 
-            Console.WriteLine("| 1 - Registrar hora extra; 2 - Reduzir sálario por falta |");
+            Console.WriteLine("| 1 - Registrar hora extra; 2 - Reduzir sálario por falta; +" +
+                               " 3 - Demitir carcereiro |");
             Console.Write("> Digite a opção desejada: ");
             int num1 = int.Parse(Console.ReadLine());
             if (num1 == 1)
@@ -973,13 +1034,24 @@ namespace Projeto_Presidio
                 Console.WriteLine(P1);
                 AtualizaCarcereiros(TodosCarcereiros);
             }
-            
-        } 
 
-        static void AtualizaCarcereiros(List<Carcereiro> car)
+            else if (num1 == 3)
+            {
+                ArquivarCarcereirosDemitidos(P1);
+
+                TodosCarcereiros.Remove(P1);
+                
+                AtualizaCarcereiros(TodosCarcereiros);
+
+                Console.WriteLine(" Carcererio removido do quadro de funcionario;");
+            }
+
+        }
+
+        public void AtualizaCarcereiros(List<Carcereiro> car)
         {
 
-            FileStream Arq1 = new FileStream("../../Carcereiros.txt", FileMode.Open, FileAccess.Write);
+            FileStream Arq1 = new FileStream("../../Carcereiros.txt", FileMode.Create, FileAccess.Write);
             StreamWriter sw1 = new StreamWriter(Arq1, Encoding.UTF8);
 
             foreach (Carcereiro lista in car)
@@ -989,8 +1061,8 @@ namespace Projeto_Presidio
 
             sw1.Close();
             Arq1.Close();
-        }      
-               
+        }
+
         public static void RelatorioCarcereiros()
         {
 
@@ -1015,7 +1087,90 @@ namespace Projeto_Presidio
             {
                 Console.WriteLine(lista.RelatorioCarcereiro());
             }
-                       
+
         }
+
+        public static void RelatorioPresosTrasferidos()
+        {
+
+            List<Presidiario> TodosPresos = new List<Presidiario>();
+
+            Data t = new Data();
+            string[] ListaP = File.ReadAllLines("../../PresosTransferidos.txt");
+            for (int i = 0; i < ListaP.Length; i++)
+            {
+                Presidiario P22 = new Presidiario();
+                string[] aux = ListaP[i].Split('|');
+                P22.setNome(aux[0]);
+                t.setData(aux[1]);
+                P22.setDataDeNascimento(t);
+                P22.setIdade(Convert.ToInt32(aux[2]));
+                P22.setId(aux[3]);
+                P22.setPeriodoDeReclusao(Convert.ToInt32(aux[4]));
+                TodosPresos.Add(P22);
+            }
+            foreach (var lista in TodosPresos)
+            {
+                Console.WriteLine(lista.Trasformar());
+            }
+
+        }
+
+        public void ArquivarPresoTransferido(Presidiario P)
+        {
+           
+            FileStream Arq1 = new FileStream("../../PresosTransferidos.txt", FileMode.Append, FileAccess.Write);
+            StreamWriter sw1 = new StreamWriter(Arq1, Encoding.UTF8);
+           
+            sw1.WriteLine(P);
+            
+            sw1.Close();
+            Arq1.Close();
+
+            
+        }
+
+        public static void RelatorioCarcereirosDemitidos()
+        {
+
+            List<Carcereiro> TodosCarcereiros = new List<Carcereiro>();
+
+            Data t = new Data();
+            string[] ListaP = File.ReadAllLines("../../CarcereirosDemitidos.txt");
+            for (int i = 0; i < ListaP.Length; i++)
+            {
+                Carcereiro P22 = new Carcereiro();
+                string[] aux = ListaP[i].Split('|');
+                P22.setNome(aux[0]);
+                t.setData(aux[1]);
+                P22.setDataDeNascimento(t);
+                P22.setIdade(Convert.ToInt32(aux[2]));
+                P22.setId(aux[3]);
+                P22.setSalario(Convert.ToInt32(aux[4]));
+                P22.setPatente(aux[5]);
+                TodosCarcereiros.Add(P22);
+            }
+            foreach (var lista in TodosCarcereiros)
+            {
+                Console.WriteLine(lista.RelatorioCarcereiro());
+            }
+
+        }
+
+        public void ArquivarCarcereirosDemitidos(Carcereiro P)
+        {
+
+            FileStream Arq1 = new FileStream("../../CarcereirosDemitidos.txt", FileMode.Append, FileAccess.Write);
+            StreamWriter sw1 = new StreamWriter(Arq1, Encoding.UTF8);
+
+            sw1.WriteLine(P);
+
+            sw1.Close();
+            Arq1.Close();
+
+
+        }       
+
     }
+
 }
