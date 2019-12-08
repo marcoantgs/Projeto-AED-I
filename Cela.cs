@@ -4,105 +4,56 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+
 namespace Projeto_Presidio
 {
     class Cela
     {
-        private int qtd_max = 1000;
+        private int qtd_max = 6;
         private List<Presidiario> Preso1;
 
-        public List<Presidiario> get_preso()
+        public Cela(List<Presidiario> Preso)
         {
-              return Preso1;
-            
-            
+            Preso1 = Preso;
+            qtd_max = 1000;
         }
-        public void set_preso(List<Presidiario> preso)
-        {
-          
-                Preso1 = preso;         
 
+        public Cela()
+        {
 
         }
-       
-        public bool Verifica_cela1()
+        public int getqtd_max()
         {
-                  
-            string[] array = File.ReadAllLines("../../Simples.txt");
-            int cont = 0;
-            for (int i = 0; i < array.Length; i++)
-            {
-              
-                cont = i + 1;
-               
-            }
-            
-            if (cont <= qtd_max)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
+            return qtd_max;
         }
-        
 
-        public bool Verifica_cela2()
+        public void setqtd_max(int max)
         {
-
-            string[] array = File.ReadAllLines("../../Qualificado.txt");
-            int cont = 0;
-            for (int i = 0; i < array.Length; i++)
-            {
-                cont = i + 1;
-
-            }
-
-            if (cont <= qtd_max)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            qtd_max = max; 
         }
-        public bool Verifica_cela3()
+        public List<Presidiario> getPreso()
         {
-
-            string[] array = File.ReadAllLines("../../Hediondo.txt");
-            int cont = 0;
-            for (int i = 0; i < array.Length; i++)
-            {
-                cont = i + 1;
-
-            }
-
-            if (cont <= qtd_max)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return Preso1;
         }
-        public  string comverter()
+
+        public void setPreso(List<Presidiario> preso)
         {
-            
-            foreach( var i in Preso1)
+            Preso1 = preso;
+        }        
+
+        public string Converter()
+        {
+            foreach (var i in Preso1)
             {
-               return i.ToString();
+                return i.ToString();
             }
             return null;
         }
+
         public override string ToString()
         {
-            return  comverter() ;
+            return Converter();
         }
-
 
     }
 }
