@@ -11,120 +11,528 @@ namespace Projeto_Presidio
     {
         static void Main(string[] args)
         {
+           
+                    Menu();
+                    
+           
+        }
 
+        public static void Menu()
+        {
+            Console.WriteLine("                                      "
+                              + "    _________________________________");
+            Console.WriteLine();
+            Console.WriteLine("                                      "
+                              + "    Presídio de Xuri - Prison Control");
+            Console.WriteLine("                                      "
+                              + "    _________________________________");
+            Console.WriteLine();
+            Console.WriteLine("                                      "
+                              + "              MENU PRINCIPAL         ");
+            Console.WriteLine("1 - Ver relatorios das celas");
+            Console.WriteLine("2 - Cadastrar Preso;");
+            Console.WriteLine("3 - Gerenciar Preso;");
+            Console.WriteLine("4 - Ver arquivo de Presos Transferidos");
+            Console.WriteLine("5 - Cadastrar carcereiro;");
+            Console.WriteLine("6 - Gerenciar carcereiro;");
+            Console.WriteLine("7 - Ver relatorios de Carcereiros");
+            Console.WriteLine("8 - Ver arquivo de Carcereiros Demitidos");
+            Console.WriteLine("9 - Sair;");
+            Console.WriteLine();
+            Console.Write("> Digite a opção desejada: ");
+            int num = int.Parse(Console.ReadLine());
+            Console.WriteLine();
 
-            Menu();
+            if (num == 1)
+            {
+                VerCela();
+            }
+           else if (num == 2)
+           {
+                CadastrarPreso();
+           }
+            else if (num == 3)
+            {
+                GerenciarPreso();
+            }
+            else if (num == 4)
+            {
+                Presidio.RelatorioPresosTrasferidos();
+            }
+            else if (num == 5)
+            {
+                CadastrarCarcereiro();
+            }
+            else if (num == 6)
+            {
+                Gerenciarcarcereiros();
+            }
+            else if (num == 7)
+            {
+                Presidio.RelatorioCarcereiros();
+            }
+            else if (num == 8)
+            {
+                Presidio.RelatorioCarcereirosDemitidos();
+            }
+            else 
+            {
+                Console.WriteLine(" Sistema Finalizado");
+            }
+        }
+
+        public static void VerCela()
+        {
+            
+            while (true)
+            {
+                Console.WriteLine("                                      "
+                              + "                VER CELAS                  ");
+               
+                Console.WriteLine("  1 - Cela M1; 2 - Cela M2; 3 - Cela M3;");
+                Console.WriteLine("  4 - Cela F1; 5 - Cela F2; 6 - Cela F3;");
+                Console.WriteLine("  7 - Nenhuma (Sair); 8 - Menu principal");
+                Console.WriteLine();
+                Console.Write("> Digite o número da cela que queira ver: ");
+                int num1 = int.Parse(Console.ReadLine());
+                if (num1 == 1 || num1 == 2 || num1 == 3)
+                {
+                    Presidio.Ver_CelaMasculina(num1);
+                }
+                else if (num1 == 4 || num1 == 5 || num1 == 6)
+                {
+                    Presidio.Ver_CelaFeminina(num1);
+                }
+
+                else if ( num1 == 7)
+                {
+                    Console.WriteLine("Sistema finalizado com sucesso!");
+                    break;
+                }
+                else if (num1 == 8)
+                {
+                    Menu();
+                }
+              
+            }
+        }
+
+        public static void CadastrarPreso()
+        {
+            Console.WriteLine("                                      "
+                             + "             CADASTRAR PRESO                  ");
+
+            Presidiario P2 = new Presidiario();
+
+            Console.WriteLine(" Sexo do Preso: M - Masculino / F - Feminino.");
+            char S = char.Parse(Console.ReadLine());
+            while (!P2.setSexo(S))
+            {
+                Console.WriteLine("Caracter inválido!");
+                Console.Write("> Por favor, tente novamente: ");
+                S = char.Parse(Console.ReadLine());
+            }
+
+            if (P2.getsexo() == 'M' || P2.getsexo() == 'm')
+            {
+                CadastrarPresoMasculino();
+            }
+
+            else if (P2.getsexo() == 'F' || P2.getsexo() == 'f')
+            {
+                CadastrarPresoFeminino();
+            }
 
         }
 
-        public static void Cadastro()
+        static void CadastrarPresoMasculino()
         {
+            List<Presidiario> Simples = new List<Presidiario>();
+            List<Presidiario> Qualificado = new List<Presidiario>();
+            List<Presidiario> Hediondo = new List<Presidiario>();
 
-            List<Presidiario> cela01 = new List<Presidiario>();
-            List<Presidiario> cela02 = new List<Presidiario>();
-            List<Presidiario> cela03 = new List<Presidiario>();
+            CelaMasculina cela1 = new CelaMasculina();
+            CelaMasculina cela2 = new CelaMasculina();
+            CelaMasculina cela3 = new CelaMasculina();
 
-            Cela PP1 = new Cela();
-            Cela PP2 = new Cela();
-            Cela PP3 = new Cela();
 
-            Presidio Xuri2 = new Presidio(PP1, PP2, PP3);
+            Presidio Xuri2 = new Presidio(cela1, cela2, cela3);
 
             Presidiario P1 = new Presidiario();
-           
-            int resposta = 2;
-            while (resposta == 2)
+
+            Console.WriteLine("Opções de crimes:");
+            Console.WriteLine("| 1 - Simples; 2 - Qualificado; 3 - Hediondo |");
+            Console.Write("> Digite o tipo de crime: ");
+            int crime = int.Parse(Console.ReadLine());
+
+            while (!P1.setCrime(crime))
             {
-                Console.WriteLine("Opções de crimes:");
-                Console.WriteLine(" 1 - Simples | 2 - Qualificado | 3 - Hediondo");
-                Console.Write("Digite o crime cometido: ");
-                int crime = int.Parse(Console.ReadLine());
-
-                while (!P1.setCrime(crime))
+                Console.WriteLine("Opção inválida! Tipo de crime inexistente!");
+                Console.WriteLine("| 1 - Simples; 2 - Qualificado; 3 - Hediondo |");
+                Console.Write("> Por favor, tente novamente: ");
+                crime = int.Parse(Console.ReadLine());
+            }
+            
+            if (P1.getCrime() == 1)
+            {
+                while (!cela1.VerificaCelaMasculina1())
                 {
-                    Console.WriteLine("ERRO! Opção inválida: 1 - Crime Simples | 2 - Qualificado | 3 - Hediondo");
-                    Console.Write("Por favor, tente novamente: ");
-                    crime = int.Parse(Console.ReadLine());
-                }
-                P1.setCrime(crime);
-
-                if (P1.getCrime() == 1)
-                {
-                    while (!PP1.Verifica_cela1())
+                    Console.WriteLine("Opção inválida! A cela está cheia!");
+                    Console.WriteLine("| 1 - Menu principal; 2 - Sair |");
+                    Console.Write("> Digite a opção desejada: ");
+                    int resposta = int.Parse(Console.ReadLine());
+                    if (resposta == 1)
                     {
-                        Console.WriteLine(" A cela esta cheia");
-                        Console.WriteLine(" Aperte 1 - Menu principal | 2 - Sair");
-                        resposta = int.Parse(Console.ReadLine());
-                        if (resposta == 1)
-                        {
-                            Menu();
-                        }
-                        else
-                        {
-                            Console.WriteLine(" Sistema finalizado ");
-                            break;
-
-                        }
+                        Menu();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Sistema finalizado com sucesso!");
+                        break;
                     }
                 }
+            }
 
-                if (P1.getCrime() == 2)
+            if (P1.getCrime() == 2)
+            {
+                while (!cela2.VerificaCelaMasculina2())
                 {
-                    while (!PP1.Verifica_cela2())
+                    Console.WriteLine("Opção inválida! A cela está cheia!");
+                    Console.WriteLine("| 1 - Menu principal; 2 - Sair |");
+                    Console.Write("> Digite a opção desejada: ");
+                    int res = int.Parse(Console.ReadLine());
+                    if (res == 1)
                     {
-                        Console.WriteLine(" A cela esta cheia");
-                        Console.WriteLine(" Aperte 1 - Menu principal | 2 - Sair");
-                        resposta = int.Parse(Console.ReadLine());
-                        if (resposta == 1)
-                        {
-                            Menu();
-                        }
-                        else
-                        {
-                            Console.WriteLine(" Sistema finalizado ");
-                            break;
-                        }
+                        Menu();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Sistema finalizado com sucesso!");
+                        break;
                     }
                 }
+            }
 
-                if (P1.getCrime() == 3)
+            if (P1.getCrime() == 3)
+            {
+                while (!cela3.VerificaCelaMasculina3())
                 {
-                    while (!PP1.Verifica_cela3())
+                    Console.WriteLine("Opção inválida! A cela está cheia!");
+                    Console.WriteLine("| 1 - Menu principal; 2 - Sair |");
+                    Console.Write("> Digite a opção desejada: ");
+                    int resp = int.Parse(Console.ReadLine());
+                    if (resp == 1)
                     {
-                        Console.WriteLine(" A cela esta cheia");
-                        Console.WriteLine(" 1 - Menu principal | 2 - Sair");
-                        resposta = int.Parse(Console.ReadLine());
-                        if (resposta == 1)
-                        {
-                            Menu();
-                        }
-                        else
-                        {
-                            Console.WriteLine(" Sistema finalizado ");
-                            break;
-                        }
+                        Menu();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Sistema finalizado com sucesso!");
+                        break;
                     }
                 }
+            }
 
+            Console.Write("> Nome: ");
+            string nome = Console.ReadLine();
+
+            while (!P1.setNome(nome))
+            {
+                Console.Write("Nome inválido!");
+                Console.WriteLine("> Por favor, tente novamente: ");
+                nome = Console.ReadLine();
+            }
+            P1.setNome(nome);
+
+            Console.Write("> ID (4 primeiros dígitos do CPF): ");
+            string id = Console.ReadLine();
+
+            while (!P1.verificarId(id))
+            {
+                Console.Write("ID inválido!");
+                Console.WriteLine("> Por favor, tente novamente: ");
+                id = Console.ReadLine();
+            }
+
+
+            Data dat = new Data();
+            Console.Write("> Data de nascimento (DD/MM/AAAA): ");
+            string datanascimento = Console.ReadLine();
+
+            while (!dat.setData(datanascimento))
+            {
+                Console.WriteLine("Data de nascimento inválida!");
+                Console.Write("> Por favor, tente novamente: ");
+                datanascimento = Console.ReadLine();
+            }
+
+            Data nascimento = new Data(datanascimento);
+            while (!P1.setDataDeNascimento(nascimento))
+            {
+                Console.WriteLine("Data de nascimento inválida!");
+                Console.Write("> Por favor, tente novamente: ");
+                datanascimento = Console.ReadLine();
+                nascimento = new Data(datanascimento);
+            }
+            P1.setDataDeNascimento(nascimento);
+
+
+            if (P1.getCrime() == 1)
+            {
+                P1.setPeriodoDeReclusao(15);
+                Simples.Add(P1);
+                cela1.setPreso(Simples);
+                Xuri2.Cadastrar_presosMasculino1();
+
+            }
+
+            else if (P1.getCrime() == 2)
+            {
+                P1.setPeriodoDeReclusao(20);
+                Qualificado.Add(P1);
+                cela2.setPreso(Qualificado);
+                Xuri2.Cadastrar_presosMasculino2();
+            }
+
+            else if (P1.getCrime() == 3)
+            {
+                P1.setPeriodoDeReclusao(30);
+                Hediondo.Add(P1);
+                cela3.setPreso(Hediondo);
+                Xuri2.Cadastrar_presosMasculino3();
+            }
+                                             
+            Console.WriteLine("Cadastrar novo preso?");
+            Console.Write("| 1 - Sair; 2 - Sim;  3 - Menu principal |");
+            Console.WriteLine("> Digite a opção desejada:");
+           int  re = int.Parse(Console.ReadLine());
+            if (re == 3)
+            {
+                Menu();
+            }
+
+            else if ( re == 2)
+            {
+                CadastrarPreso();
+            }           
+             else
+            {
+                Console.WriteLine( " Sisitema finalizado com sucesso:");
+            }
+        }
+
+        static void CadastrarPresoFeminino()
+        {
+            List<Presidiario> Simples = new List<Presidiario>();
+            List<Presidiario> Qualificado = new List<Presidiario>();
+            List<Presidiario> Hediondo = new List<Presidiario>();
+
+            CelaFeminina cela1 = new CelaFeminina();
+            CelaFeminina cela2 = new CelaFeminina();
+            CelaFeminina cela3 = new CelaFeminina();
+
+
+            Presidio Xuri2 = new Presidio(cela1, cela2, cela3);
+
+            Presidiario P1 = new Presidiario();
+
+           
+
+
+            Console.WriteLine("Opções de crimes:");
+            Console.WriteLine("| 1 - Simples; 2 - Qualificado; 3 - Hediondo |");
+            Console.Write("> Digite o tipo de crime: ");
+            int crime = int.Parse(Console.ReadLine());
+
+            while (!P1.setCrime(crime))
+            {
+                Console.WriteLine("Opção inválida! Tipo de crime inexistente!");
+                Console.WriteLine("| 1 - Simples; 2 - Qualificado; 3 - Hediondo |");
+                Console.Write("> Por favor, tente novamente: ");
+                crime = int.Parse(Console.ReadLine());
+            }
+            P1.setCrime(crime);
+
+            if (P1.getCrime() == 1)
+            {
+                while (!cela1.VerificaCelaFeminina1())
+                {
+                    Console.WriteLine("Opção inválida! A cela está cheia!");
+                    Console.WriteLine("| 1 - Menu principal; 2 - Sair |");
+                    Console.Write("> Digite a opção desejada: ");
+                    int res = int.Parse(Console.ReadLine());
+                    if (res == 1)
+                    {
+                        Menu();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Sistema finalizado com sucesso!");
+                        break;
+                    }
+                }
+            }
+
+            if (P1.getCrime() == 2)
+            {
+                while (!cela2.VerificaCelaFeminina2())
+                {
+                    Console.WriteLine("Opção inválida! A cela está cheia!");
+                    Console.WriteLine("| 1 - Menu principal; 2 - Sair |");
+                    Console.Write("> Digite a opção desejada: ");
+                    int resp = int.Parse(Console.ReadLine());
+                    if (resp == 1)
+                    {
+                        Menu();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Sistema finalizado com sucesso!");
+                        break;
+                    }
+                }
+            }
+
+            if (P1.getCrime() == 3)
+            {
+                while (!cela3.VerificaCelaFeminina3())
+                {
+                    Console.WriteLine("Opção inválida! A cela está cheia!");
+                    Console.WriteLine("| 1 - Menu principal; 2 - Sair |");
+                    Console.Write("> Digite a opção desejada: ");
+                    int respo = int.Parse(Console.ReadLine());
+                    if (respo == 1)
+                    {
+                        Menu();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Sistema finalizado com sucesso!");
+                        break;
+                    }
+                }
+            }
+
+            Console.Write("> Nome: ");
+            string nome = Console.ReadLine();
+
+            while (!P1.setNome(nome))
+            {
+                Console.Write("Nome inválido!");
+                Console.WriteLine("> Por favor, tente novamente: ");
+                nome = Console.ReadLine();
+            }
+            P1.setNome(nome);
+
+            Console.Write("> ID (4 primeiros dígitos do CPF): ");
+            string id = Console.ReadLine();
+
+            while (!P1.verificarId(id))
+            {
+                Console.Write("ID inválido!");
+                Console.WriteLine("> Por favor, tente novamente: ");
+                id = Console.ReadLine();
+            }
+
+
+            Data dat = new Data();
+            Console.Write("> Data de nascimento (DD/MM/AAAA): ");
+            string datanascimento = Console.ReadLine();
+
+            while (!dat.setData(datanascimento))
+            {
+                Console.WriteLine("Data de nascimento inválida!");
+                Console.Write("> Por favor, tente novamente: ");
+                datanascimento = Console.ReadLine();
+            }
+
+            Data nascimento = new Data(datanascimento);
+            while (!P1.setDataDeNascimento(nascimento))
+            {
+                Console.WriteLine("Data de nascimento inválida!");
+                Console.Write("> Por favor, tente novamente: ");
+                datanascimento = Console.ReadLine();
+                nascimento = new Data(datanascimento);
+            }
+            P1.setDataDeNascimento(nascimento);
+
+
+            if (P1.getCrime() == 1)
+            {
+                P1.setPeriodoDeReclusao(15);
+                Simples.Add(P1);
+                cela1.setPreso(Simples);
+                Xuri2.Cadastrar_presosFeminina1();
+
+            }
+
+            else if (P1.getCrime() == 2)
+            {
+                P1.setPeriodoDeReclusao(20);
+                Qualificado.Add(P1);
+                cela2.setPreso(Qualificado);
+                Xuri2.Cadastrar_presosFeminina2();
+            }
+
+            else if (P1.getCrime() == 3)
+            {
+                P1.setPeriodoDeReclusao(30);
+                Hediondo.Add(P1);
+                cela3.setPreso(Hediondo);
+                Xuri2.Cadastrar_presosFeminina3();
+            }
+
+            Console.WriteLine("Cadastrar novo preso?");
+            Console.Write("| 1 - Sair; 2 - Sim;  3 - Menu principal |");
+            Console.WriteLine("> Digite a opção desejada:");
+            int re = int.Parse(Console.ReadLine());
+            if (re == 3)
+            {
+                Menu();
+            }
+                 
+            else if (re == 2)
+            {
+                CadastrarPreso();
+            }
+
+            else
+            {
+                Console.WriteLine(" Sistema finalozado com sucesso: ");
+            }
+        }
+        static void CadastrarCarcereiro()
+        {
+           
+            while (true)
+            {
+                Carcereiro C1 = new Carcereiro();
+
+                while (!C1.VerificaqtdCarcereiro())
+                {
+                    Console.Write("ERRO! Quadro de funcionarios completo");
+                    Menu();
+                }
+
+               
                 Console.Write("Nome: ");
                 string nome = Console.ReadLine();
-                while (!P1.setNome(nome))
+                while (!C1.setNome(nome))
                 {
                     Console.Write("ERRO! Nome inválido.");
                     Console.WriteLine("Por favor, tente novamente: ");
                     nome = Console.ReadLine();
                 }
-                P1.setNome(nome);
 
-                Console.Write("Número ID do detento, com 4 digitos): ");
+                Console.Write("Número ID do, com 4 digitos): ");
                 string cpf = Console.ReadLine();
-                while (!P1.verificacpf_preso(cpf))
+                while (!C1.verificarId(cpf))
                 {
                     Console.Write("ERRO! ID ja existente.");
                     Console.WriteLine("Por favor, tente novamente: ");
                     cpf = Console.ReadLine();
                 }
-                P1.verificacpf_preso(cpf);
+
                 Data dat = new Data();
                 Console.Write("Data de nascimento (dd/MM/AAAA): ");
                 string datanascimento = Console.ReadLine();
@@ -135,155 +543,139 @@ namespace Projeto_Presidio
                     datanascimento = Console.ReadLine();
                 }
                 Data nascimento = new Data(datanascimento);
-                while (!P1.setData_nascimento(nascimento))
+                while (!C1.setDataDeNascimento(nascimento))
                 {
-                    Console.WriteLine("ERRO! Data de nascimento inválida, o detento é menor de idade.");
+                    Console.WriteLine("ERRO! Data de nascimento inválida, carcereiro  é menor de idade.");
                     Console.Write("Por favor, tente novamente: ");
                     datanascimento = Console.ReadLine();
                     nascimento = new Data(datanascimento);
                 }
-                P1.setData_nascimento(nascimento);
 
-
-                if (P1.getCrime() == 1)
+                Console.WriteLine(" Qual Sexo: M - Masculino / F - Feminino");
+                char S = char.Parse(Console.ReadLine());
+                while (!C1.setSexo(S))
                 {
-                    P1.setPeriodoReclusao(15);
-
-                    cela01.Add(P1);
-
+                    Console.WriteLine("ERRO! Sexo inválido.");
+                    Console.Write("Por favor, tente novamente (dd/MM/AAAA): ");
+                    S = char.Parse(Console.ReadLine());
                 }
 
-                if (P1.getCrime() == 2)
+                Console.Write("Qual a Patente do carcereiro? Soldado / Cabo : ");
+                string Car = Console.ReadLine();
+                while (!C1.VerificaPatente(Car))
                 {
-                    P1.setPeriodoReclusao(20);
-                    cela02.Add(P1);
-
+                    Console.Write("ERRO! Patente não existente.");
+                    Console.WriteLine("Por favor, tente novamente: ");
+                    Car = Console.ReadLine();
                 }
 
-                if (P1.getCrime() == 3)
+                if (C1.getPatente() == "Soldado" || C1.getPatente() == "soldado")
                 {
-                    P1.setPeriodoReclusao(30);
-                    cela03.Add(P1);
+                    C1.setSalario(2000);
                 }
-                                                            
-                PP1.set_preso(cela01);
-                PP2.set_preso(cela02);
-                PP3.set_preso(cela03);
-
-               
-
-                Xuri2.Cadastrar_presos();
-
-                Console.WriteLine("Cadastrar novo preso? (1 - Sair | 2 - Sim | 3 - Menu principal):");
-                resposta = int.Parse(Console.ReadLine());
-                if (resposta == 3)
+                else if (C1.getPatente() == "Cabo" || C1.getPatente() == "cabo")
                 {
-                    Menu();
+                    C1.setSalario(3000);
                 }
 
-            }
 
-            foreach (var i in cela01)
-            {
-                Console.WriteLine(i);
-            }
+                List<Carcereiro> Car1 = new List<Carcereiro>();
+                Car1.Add(C1);
+                Presidio xuri3 = new Presidio();
+                xuri3.setCarcereiros(Car1);
 
-        }
 
-        public static void Ver_arquivo()
-        {
-            int num = 1;
-            while (num == 1)
-            {
-                Console.WriteLine("Digite o número da cela que queira ver:");
-                Console.WriteLine("1 - Cela1 | 2 - Cela2 | 3 - Cela3 | 4 - Sair | 5 - Menu Principal:");
-                int num1 = int.Parse(Console.ReadLine());
-                if (num1 == 1 || num1 == 2 || num1 == 3)
+
+                Console.WriteLine("Cadastrar novo Carcereiro? (1 - Sair | 2 - Sim |+" +
+                                  " 3 - Menu principal):");
+                int numero = int.Parse(Console.ReadLine());
+
+                xuri3.CadastrarCarcereiros();
+
+                if (numero == 1)
                 {
-                    Presidio.Ver_Cela(num1);
-
-                }
-                else if (num1 == 4)
-                {
-                    Console.WriteLine("Sistema finalizado!");
                     break;
-
                 }
-                else if (num1 == 5)
+                else if (numero == 3)
                 {
                     Menu();
                 }
-                else
-                {
-                    Console.WriteLine("ERRO! Opção inválida. Por favor, tente novamente:");
-                    Console.WriteLine("Digite 1 - Cela1 | 2 - Cela2 | 3 - Cela3 | 4 - Sair | 5 - Menu cadastro");
-                    num1 = int.Parse(Console.ReadLine());
-                }
-            }
-        }
-        public static void Menu()
-        {
-            Console.WriteLine("_________________________________");
-            Console.WriteLine();
-            Console.WriteLine("Presídio de Xuri (Prison Control)");
-            Console.WriteLine("_________________________________");
-            Console.WriteLine();
-            Console.WriteLine(">> Digite a opção desejada:");
-            Console.WriteLine();
-            Console.WriteLine(" 1 - Ver relatorios de cela, 2 - Cadastrar preso, 3 - Gerenciar Presos, 4 - Gerenciar Carcereiros, 5 - Sair ");
-            int num = int.Parse(Console.ReadLine());
 
-            if (num == 1)
-            {
-                Ver_arquivo();
-            }
-            if (num == 2)
-            {
-                Cadastro();
-            }
-            if (num == 3)
-            {
-                CPresos();
             }
 
         }
-
-        static void CPresos()
+        static void GerenciarPreso()
         {
-           
             Presidio xuri4 = new Presidio();
-            Console.WriteLine(" Digite o numero da cela: 1 - Crimes Simples, 2 - Crimes Qualificados, 3 - Crimes Hediondos");
+            Console.WriteLine("                                      "
+                              + "             GERENCIAR PRESO                  ");
+            Console.WriteLine("Opções de celas:");
+            Console.WriteLine("| 1 - M Simples; 2 - M Qualificados; 3 - M Hediondos + " +
+                              "| 4 - F Simples; 5 - F Qualificados; 6 - F Hediondos");
+            Console.Write("> Digite o número da cela: ");
             int cr = int.Parse(Console.ReadLine());
 
-            if(cr == 1)
+            if (cr == 1)
             {
-                xuri4.Gerenciar1();
+                xuri4.GerenciarCelaMasculina1();
             }
             else if (cr == 2)
             {
-                xuri4.Gerenciar2();
+                xuri4.GerenciarCelaMasculina2();
             }
 
             else if (cr == 3)
             {
-                xuri4.Gerenciar3();
+                xuri4.GerenciarCelaMasculina3();
             }
 
-            Console.WriteLine(" Digite: 1 - Menu principal / 2 - Sair");
+            else if (cr == 4)
+            {
+                xuri4.GerenciarCelaFeminina1();
+            }
+            else if (cr == 5)
+            {
+                xuri4.GerenciarCelaFeminina2();
+            }
+
+            else if (cr == 6)
+            {
+                xuri4.GerenciarCelaFeminina3();
+            }
+         
+            Console.WriteLine("| 1 - Menu principal; 2 - Sair |");
+            Console.Write("> Digite a opção desejada: ");
             int numer = int.Parse(Console.ReadLine());
 
-            if(numer == 1)
+            if (numer == 1)
             {
                 Menu();
             }
             else if (numer == 2)
             {
-                Console.WriteLine("Sistema finalizado");
+                Console.WriteLine("Sistema finalizado com sucesso!");
             }
-           
+        }
+
+        static void Gerenciarcarcereiros()
+        {
+            Presidio xuri2 =  new Presidio();
+            xuri2.GerenciarCarcereiros();
+
+            Console.WriteLine("| 1 - Menu principal; 2 - Sair |");
+            Console.Write("> Digite a opção desejada: ");
+            int numer = int.Parse(Console.ReadLine());
+
+            if (numer == 1)
+            {
+                Menu();
+            }
+            else if (numer == 2)
+            {
+                Console.WriteLine("Sistema finalizado com sucesso!");
+            }
         }
 
 
-   
     }
 }
