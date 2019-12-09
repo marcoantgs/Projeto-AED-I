@@ -54,6 +54,7 @@ namespace Projeto_Presidio
                 P22.setPeriodoDeReclusao(Convert.ToInt32(aux[4]));
                 TodosPresos.Add(P22);
             }
+            Console.WriteLine("  Detentos Cadastrodas: -> Cela Crimes Simples");
             Console.WriteLine();
             foreach (var list in TodosPresos)
             {
@@ -69,8 +70,8 @@ namespace Projeto_Presidio
 
             Console.WriteLine();
 
-            Console.WriteLine("| 1 - Acrescentar anos de reclusão; 2 - Reduzir anos de reclusão;" +
-                               " 3 - Preso Transferido retira-lo do sistema |");
+            Console.WriteLine("1 - Acrescentar anos de reclusão | 2 - Reduzir anos de reclusão" +
+                                " | 3 - Preso transferido (retirá-lo do sistema)");
             Console.WriteLine();
             Console.Write("> Digite a opção desejada: ");
             int num1 = int.Parse(Console.ReadLine());
@@ -138,6 +139,7 @@ namespace Projeto_Presidio
                 TodosPresos.Remove(P1);
                 AtualizarCelaMasculina1(TodosPresos);
                 Console.WriteLine(" Preso removido do sistema");
+                
 
             }
         }
@@ -158,7 +160,8 @@ namespace Projeto_Presidio
                 P22.setPeriodoDeReclusao(Convert.ToInt32(aux[4]));
                 TodosPresos.Add(P22);
             }
-
+            Console.WriteLine("  Detentos Cadastrodas: -> Cela Crimes Qualificados");
+            Console.WriteLine();
             foreach (var lista in TodosPresos)
             {
                 Console.WriteLine(lista.Trasformar());
@@ -173,9 +176,8 @@ namespace Projeto_Presidio
 
             Console.WriteLine();
 
-            Console.WriteLine("| 1 - Acrescentar anos de reclusão; 2 - Reduzir anos de reclusão; +" +
-                               " 3 - Preso Transferido retira-lo do sistema |");
-
+            Console.WriteLine("1 - Acrescentar anos de reclusão | 2 - Reduzir anos de reclusão" +
+                               " | 3 - Preso transferido (retirá-lo do sistema)");
             Console.WriteLine();
             Console.Write("> Digite a opção desejada: ");
             int num1 = int.Parse(Console.ReadLine());
@@ -260,6 +262,7 @@ namespace Projeto_Presidio
                 P22.setPeriodoDeReclusao(Convert.ToInt32(aux[4]));
                 TodosPresos.Add(P22);
             }
+            Console.WriteLine("  Detentos Cadastrodas: -> Cela Crimes Hediondos");
             Console.WriteLine();
             foreach (var lista in TodosPresos)
             {
@@ -275,8 +278,8 @@ namespace Projeto_Presidio
 
             Console.WriteLine();
 
-            Console.WriteLine("| 1 - Acrescentar anos de reclusão; 2 - Reduzir anos de reclusão; " +
-                               " 3 - Preso Transferido, retira-lo do sistema |");
+            Console.WriteLine("1 - Acrescentar anos de reclusão | 2 - Reduzir anos de reclusão" +
+                              " | 3 - Preso transferido (retirá-lo do sistema)");
             Console.WriteLine();
             Console.Write("> Digite a opção desejada: ");
             int num1 = int.Parse(Console.ReadLine());
@@ -439,12 +442,16 @@ namespace Projeto_Presidio
                     P22.setPeriodoDeReclusao(Convert.ToInt32(aux[4]));
                     TodosPresos.Add(P22);
                 }
+                Console.WriteLine("  Detentos Cadastrados: -> Cela Crimes Simples");
+                Console.WriteLine();
                 foreach (var lista in TodosPresos)
                 {
                     Console.WriteLine(lista.Trasformar());
+                   
                 }
+               
             }
-
+          
             if (num == 2)
             {
                 List<Presidiario> TodosPresos = new List<Presidiario>();
@@ -463,12 +470,14 @@ namespace Projeto_Presidio
                     P22.setPeriodoDeReclusao(Convert.ToInt32(aux[4]));
                     TodosPresos.Add(P22);
                 }
+                Console.WriteLine("  Detentos Cadastrodas: -> Cela Crimes Qualificados");
+                Console.WriteLine();
                 foreach (var lista in TodosPresos)
                 {
                     Console.WriteLine(lista.Trasformar());
                 }
             }
-
+            
             if (num == 3)
             {
                 List<Presidiario> TodosPresos = new List<Presidiario>();
@@ -489,12 +498,14 @@ namespace Projeto_Presidio
                     TodosPresos.Add(P22);
 
                 }
-
+                Console.WriteLine("  Detentos Cadastrodas: -> Cela Crimes Hediondos");
+                Console.WriteLine();
                 foreach (var lista in TodosPresos)
                 {
                     Console.WriteLine(lista.Trasformar());
                 }
             }
+           
         }
 
         public void GerenciarCelaFeminina1()
@@ -514,6 +525,7 @@ namespace Projeto_Presidio
                 P22.setPeriodoDeReclusao(Convert.ToInt32(aux[4]));
                 TodosPresos.Add(P22);
             }
+            Console.WriteLine("  Detentas Cadastradas: -> Cela Crimes Simples");
             Console.WriteLine();
             foreach (var list in TodosPresos)
             {
@@ -529,8 +541,8 @@ namespace Projeto_Presidio
 
             Console.WriteLine();
 
-            Console.WriteLine("| 1 - Acrescentar anos de reclusão; 2 - Reduzir anos de reclusão; +" +
-                               " 3 - Preso Transferido retira-lo do sistema |");
+            Console.WriteLine("1 - Acrescentar anos de reclusão | 2 - Reduzir anos de reclusão" +
+                               " | 3 - Preso transferido (retirá-lo do sistema)");
             Console.WriteLine();
             Console.Write("> Digite a opção desejada: ");
             int num1 = int.Parse(Console.ReadLine());
@@ -617,6 +629,7 @@ namespace Projeto_Presidio
                 P22.setPeriodoDeReclusao(Convert.ToInt32(aux[4]));
                 TodosPresos.Add(P22);
             }
+            Console.WriteLine("  Detentas Cadastradas: -> Cela Crimes Qualificados");
             Console.WriteLine();
             foreach (var lista in TodosPresos)
             {
@@ -633,11 +646,12 @@ namespace Projeto_Presidio
             Console.WriteLine();
 
 
-            Console.WriteLine("| 1 - Acrescentar anos de reclusão; 2 - Reduzir anos de reclusão; +" +
-                               " 3 - Preso Transferido retira-lo do sistema |");
+            Console.WriteLine("1 - Acrescentar anos de reclusão | 2 - Reduzir anos de reclusão" +
+                               " | 3 - Preso transferido (retirá-lo do sistema)");
             Console.WriteLine();
-            Console.Write("> Digite a opção desejada: ");
+            Console.Write("> Digite a opção desejada: ");            
             int num1 = int.Parse(Console.ReadLine());
+            Console.WriteLine();
             if (num1 == 1)
             {
                 Console.WriteLine("Qual o motivo?");
@@ -718,6 +732,7 @@ namespace Projeto_Presidio
                 P22.setPeriodoDeReclusao(Convert.ToInt32(aux[4]));
                 TodosPresos.Add(P22);
             }
+            Console.WriteLine("  Detentas Cadastradas Cela Crimes Hediondos");
             Console.WriteLine();
             foreach (var lista in TodosPresos)
             {
@@ -733,11 +748,12 @@ namespace Projeto_Presidio
 
             Console.WriteLine();
 
-            Console.WriteLine("| 1 - Acrescentar anos de reclusão; 2 - Reduzir anos de reclusão; +" +
-                               " 3 - Preso Transferido retira-lo do sistema |");
+            Console.WriteLine("1 - Acrescentar anos de reclusão | 2 - Reduzir anos de reclusão" +
+                               " | 3 - Preso transferido (retirá-lo do sistema)");
             Console.WriteLine();
             Console.Write("> Digite a opção desejada: ");
             int num1 = int.Parse(Console.ReadLine());
+            Console.WriteLine();
             if (num1 == 1)
             {
                 Console.WriteLine("Qual o motivo?");
@@ -896,6 +912,8 @@ namespace Projeto_Presidio
                     P22.setPeriodoDeReclusao(Convert.ToInt32(aux[4]));
                     TodosPresos.Add(P22);
                 }
+                Console.WriteLine("  Detentas Cadastradas: -> Cela Crimes Simples");
+                Console.WriteLine();
                 foreach (var lista in TodosPresos)
                 {
                     Console.WriteLine(lista.Trasformar());
@@ -920,6 +938,8 @@ namespace Projeto_Presidio
                     P22.setPeriodoDeReclusao(Convert.ToInt32(aux[4]));
                     TodosPresos.Add(P22);
                 }
+                Console.WriteLine("  Detentas Cadastradas: -> Cela Crimes Qualificados");
+                Console.WriteLine();
                 foreach (var lista in TodosPresos)
                 {
                     Console.WriteLine(lista.Trasformar());
@@ -946,7 +966,8 @@ namespace Projeto_Presidio
                     TodosPresos.Add(P22);
 
                 }
-
+                Console.WriteLine("  Detentas Cadastradas Cela: -> Crimes Hediondos");
+                Console.WriteLine();
                 foreach (var lista in TodosPresos)
                 {
                     Console.WriteLine(lista.Trasformar());
@@ -970,8 +991,6 @@ namespace Projeto_Presidio
 
         public void GerenciarCarcereiros()
         {
-
-
             List<Carcereiro> TodosCarcereiros = new List<Carcereiro>();
 
             Data t = new Data();
@@ -989,13 +1008,13 @@ namespace Projeto_Presidio
                 P22.setPatente(aux[5]);
                 TodosCarcereiros.Add(P22);
             }
+            Console.WriteLine("Carcereiros cadastrados:");
+            Console.WriteLine();
             foreach (var lista in TodosCarcereiros)
             {
+
                 Console.WriteLine(lista.RelatorioCarcereiro());
             }
-
-
-
             Console.WriteLine();
             Console.Write("> Digite o ID do Carcereiro: ");
             string id = Console.ReadLine();
@@ -1003,10 +1022,7 @@ namespace Projeto_Presidio
             Carcereiro P1;
             P1 = TodosCarcereiros.Find(y => y.getId().Contains(id));
 
-            Console.WriteLine(P1);
-
-
-            Console.WriteLine("| 1 - Registrar hora extra; 2 - Reduzir sálario por falta; +" +
+            Console.WriteLine("| 1 - Registrar hora extra; 2 - Reduzir sálario por falta; " +
                                " 3 - Demitir carcereiro |");
             Console.Write("> Digite a opção desejada: ");
             int num1 = int.Parse(Console.ReadLine());
@@ -1014,10 +1030,12 @@ namespace Projeto_Presidio
             {
                 Console.WriteLine("Quantas horas extras feitas?");
                 int num2 = int.Parse(Console.ReadLine());
+                Console.WriteLine();
 
                 int total = num2 * 5;
 
                 double aux = P1.getSalario() + total;
+                Console.WriteLine("Salario atualizado:");
                 P1.setSalario(aux);
                 Console.WriteLine(P1);
                 AtualizaCarcereiros(TodosCarcereiros);
@@ -1026,13 +1044,17 @@ namespace Projeto_Presidio
             {
                 Console.WriteLine("Quantas faltas no mês?");
                 int num2 = int.Parse(Console.ReadLine());
+                Console.WriteLine();
 
                 int total = num2 * 20;
 
                 double aux = P1.getSalario() - total;
+                Console.WriteLine("Salario atualizado:");
                 P1.setSalario(aux);
                 Console.WriteLine(P1);
                 AtualizaCarcereiros(TodosCarcereiros);
+                
+               
             }
 
             else if (num1 == 3)
@@ -1083,6 +1105,7 @@ namespace Projeto_Presidio
                 P22.setPatente(aux[5]);
                 TodosCarcereiros.Add(P22);
             }
+            Console.WriteLine("CARCEREIROS ATUAIS:");
             foreach (var lista in TodosCarcereiros)
             {
                 Console.WriteLine(lista.RelatorioCarcereiro());
@@ -1109,6 +1132,8 @@ namespace Projeto_Presidio
                 P22.setPeriodoDeReclusao(Convert.ToInt32(aux[4]));
                 TodosPresos.Add(P22);
             }
+            Console.WriteLine("PRESOS TRASFERIDOS");
+            Console.WriteLine();
             foreach (var lista in TodosPresos)
             {
                 Console.WriteLine(lista.Trasformar());
@@ -1150,11 +1175,13 @@ namespace Projeto_Presidio
                 P22.setPatente(aux[5]);
                 TodosCarcereiros.Add(P22);
             }
+            Console.WriteLine("CARCEREIROS DEMITIDOS:");
+            Console.WriteLine();
             foreach (var lista in TodosCarcereiros)
             {
                 Console.WriteLine(lista.RelatorioCarcereiro());
             }
-
+            
         }
 
         public void ArquivarCarcereirosDemitidos(Carcereiro P)
