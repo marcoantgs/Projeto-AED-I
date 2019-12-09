@@ -15,7 +15,7 @@ namespace Projeto_Presidio
         public Cela(List<Presidiario> Preso)
         {
             Preso1 = Preso;
-            qtd_max = 1000;
+            qtd_max = 6;
         }
 
         public Cela()
