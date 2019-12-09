@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
+
 namespace Projeto_Presidio
 {
     class Pessoa
@@ -20,31 +21,41 @@ namespace Projeto_Presidio
 
         }
 
+        public Pessoa(string nome, Data dn, int idade, char sexo, string id)
+        {
+            Nome = nome;
+            Data_nascimento = dn;
+            Idade = idade;
+            Sexo = sexo;
+            Id_pessoa = id;
+        }
+
         public string getNome()
         {
             return Nome;
         }
 
-        public bool setNome(string nome)
+        public void  setNome(string nome)
         {
+           
             if (nome.Length < 3)
-                return false;  
-                
-            for(int i = 0; i < nome.Length; i++)
+            {
+                throw new Nomeinvalido();
+            }
+
+            for (int i = 0; i < nome.Length; i++)
             {
                 if (char.IsNumber(nome, i))
                 {
-
-                    return false;
+                    throw new Nomeinvalido();
                 }
-                   
-            }            
+            }
             Nome = nome;
-            return true;
            
+          
         }
 
-        public static Data getDataDeNascimento()
+        public  Data getDataDeNascimento()
         {
             return Data_nascimento;
         }
@@ -106,18 +117,18 @@ namespace Projeto_Presidio
             Id_pessoa = n;
         }
 
-        public bool verificarId(string num)
+        public void verificarId(string num)
         {
             if (num.Length != 4)
             {
-                return false;
+                throw new ID_Invalido();
             }
 
             for (int i = 0; i < num.Length; i++)
             {
                 if(char.IsLetter(num, i))
                 {
-                    return false;
+                    throw new ID_Invalido();
                 }
             }
             List<string> ID = new List<string>();
@@ -141,9 +152,12 @@ namespace Projeto_Presidio
                 Arq1.Close();
 
                 setId(num);
-                return true;
+               
             }
-            return false;
+            else
+            {
+                throw new ID_Invalido();
+            }
         }
 
     }
