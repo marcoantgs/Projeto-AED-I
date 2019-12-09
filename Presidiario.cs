@@ -4,85 +4,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-using System.Xml.Serialization;
 
 namespace Projeto_Presidio
 {
-    class Presidiario:Pessoas
+    class Presidiario : Pessoa
     {
-        private  string Nome;
-        private static Data Datanascimento;
-        private  int Crime;
-        private  int Periodo_Reclusao;
-        private  string Cpf_preso;
-        private  int Idade;
+        private int Crime;
+        private int Periodo_reclusao;
 
-                   
         public Presidiario()
         {
 
         }
-        public  string getNome()
+
+        public Presidiario(int crime, int periodo, string nome, Data dn, int idade,
+                         char sexo, string id) : base(nome, dn, idade, sexo, id)
         {
-            return Nome;
+            Crime = crime;
+            Periodo_reclusao = periodo;
         }
 
-        public  bool setNome(string nome)
+        public int getPeriodoDeReclusao()
         {
-
-            if (nome.Length >= 3)
-            {
-                Nome = nome;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return Periodo_reclusao;
         }
-
-        public int getIdade()
+        public void setPeriodoDeReclusao(int periodo)
         {
-            return Idade;
-        }
-        public void setIdade(int num)
-        {
-            Idade = num;
-        }
-
-        public int getPeriodoReclusao()
-        {
-            return Periodo_Reclusao;
-        }
-        public void setPeriodoReclusao(int periodo)
-        {
-           Periodo_Reclusao = periodo;
-        }
-
-        public static Data getData_nascimento()
-        {
-            return Datanascimento;
-        }
-
-       
-        public bool setData_nascimento(Data nascimento)
-        {
-            Idade = DateTime.Today.Year - nascimento.getAno();
-            if (DateTime.Today.Month < nascimento.getMes() || (DateTime.Today.Month == nascimento.getMes() && DateTime.Today.Day < nascimento.getDia()))
-            {
-                Idade --;
-            }
-
-            if (Idade < 18)
-            {
-                return false;
-            }
-            else
-            {
-
-                Datanascimento = nascimento;
-                return true;
-            }
+            Periodo_reclusao = periodo;
         }
 
         public int getCrime()
@@ -102,66 +50,21 @@ namespace Projeto_Presidio
                 default:
                     break;
             }
-
             return false;
         }
 
-       
-        public string getcpf_preso()
+        public string Trasformar()
         {
-            return Cpf_preso;
+            return " Nome: " +getNome()+ " | Data de nascimento: " +getDataDeNascimento()
+                 + "|Idade: "+getIdade()+ " Anos | ID: " +getId()+ " | Tempo de reclusão: "
+                   + Periodo_reclusao + " Anos ";
         }
-
-        public void setCpf_preso(string n)
-        {
-            Cpf_preso = n;
-        }
-       
-        public bool verificacpf_preso(string num)
-        {
-            List<string> ID = new List<string>();
-
-            string[] ListaID= File.ReadAllLines("../../listadeID.txt");
-            
-            for (int i = 0; i < ListaID.Length; i++)
-            {
-                ID.Add(ListaID[i]);
-
-
-            }          
-            
-            if (!ID.Contains(num))
-            {
-                FileStream Arq1 = new FileStream("../../listadeID.txt", FileMode.Append, FileAccess.Write);
-                StreamWriter sw1 = new StreamWriter(Arq1, Encoding.UTF8);
-
-                sw1.WriteLine(num);
-
-                sw1.Close();
-                Arq1.Close();
-
-                setCpf_preso(num);                
-                return true;
-            }
-
-            return false;
-
-
-
-        }
-       public string Trasformar()
-       {
-            return " Nome: " + Nome + " | Data nascimento: " + Datanascimento + " | Idade: " + Idade +
-                " | ID Detento: " + Cpf_preso + " | Tempo de reclusao: " + Periodo_Reclusao;
-       }
-       
-
-       
 
         public override string ToString()
         {
-            return  Nome + " | " + Datanascimento + " | " + Idade +
-                " | " + Cpf_preso + "|" + Periodo_Reclusao;
+            return getNome() + " | " + getDataDeNascimento() + " | " + getIdade() +
+                   " | " + getId() + "|" + Periodo_reclusao;
         }
+
     }
 }
