@@ -4,23 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace Projeto_Presidio
 {
     class Data
     {
-        private  int dia, mes, ano;
-       
+        private int dia, mes, ano;
+
         public Data()
         {
 
         }
 
-        public  int  getDia()
+        public int getDia()
         {
             return dia;
         }
-        public  int getMes()
+        public int getMes()
         {
             return mes;
         }
@@ -33,7 +34,7 @@ namespace Projeto_Presidio
             dia = d;
         }
 
-        public  void setMes(int m)
+        public void setMes(int m)
         {
             mes = m;
         }
@@ -43,23 +44,23 @@ namespace Projeto_Presidio
             ano = a;
         }
 
-        public  bool setData(string data)
+        public bool setData(string data)
         {
             string[] dat = data.Split('/');
             dia = int.Parse(dat[0]);
             mes = int.Parse(dat[1]);
             ano = int.Parse(dat[2]);
 
-           if (dia < MaxDiasMes())
-           {
-               return true;
-           }
+            if (dia < MaxDiasMes())
+            {
+                return true;
+            }
             else
             {
                 return false;
             }
         }
-      
+
 
         public Data(string data)
         {
@@ -67,10 +68,7 @@ namespace Projeto_Presidio
             dia = int.Parse(dat[0]);
             mes = int.Parse(dat[1]);
             ano = int.Parse(dat[2]);
-            
-
         }
-
 
         public Data(int d, int m, int a)
         {
@@ -79,7 +77,6 @@ namespace Projeto_Presidio
             ano = a;
         }
 
-      
         public override string ToString()
         {
             return string.Format("{0}/{1}/{2}", dia, mes, ano);
@@ -89,9 +86,8 @@ namespace Projeto_Presidio
         {
             return (ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0);
         }
-      
 
-        public  int MaxDiasMes()
+        public int MaxDiasMes()
         {
             switch (mes)
             {
@@ -115,8 +111,6 @@ namespace Projeto_Presidio
             }
         }
 
-        
-
         private void IncrementaUmDia()
         {
             if (dia < MaxDiasMes())
@@ -138,13 +132,13 @@ namespace Projeto_Presidio
             }
         }
 
-        public  void Incrementa(int dias)
+        public void Incrementa(int dias)
         {
             for (int cont = 1; cont <= dias; cont++)
                 IncrementaUmDia();
         }
 
-        public  bool Maior(Data outra_data)
+        public bool Maior(Data outra_data)
         {
             if (outra_data.ano < ano)
             {
@@ -157,21 +151,14 @@ namespace Projeto_Presidio
 
             }
 
-
             else if (outra_data.ano == ano && outra_data.ano == mes && outra_data.dia < dia)
             {
                 return true;
             }
-
             return false;
-
-
-
         }
 
-       
-
-        public  bool Igual(Data outra_data)
+        public bool Igual(Data outra_data)
         {
             if (outra_data.ano == ano)
             {
@@ -204,14 +191,14 @@ namespace Projeto_Presidio
 
             int dif_dias = 0;
             int dif_anos = 0;
-            
+
             while (!menor.Igual(maior))
             {
                 menor.IncrementaUmDia();
                 dif_dias++;
                 if (Bissexto() == true)
                 {
-                    if(dif_dias == 366)
+                    if (dif_dias == 366)
                     {
                         dif_anos++;
                         dif_dias = 0;
@@ -219,23 +206,14 @@ namespace Projeto_Presidio
                 }
                 else
                 {
-                    if(dif_dias == 365)
+                    if (dif_dias == 365)
                     {
                         dif_anos++;
                         dif_dias = 0;
                     }
-                    
-                   
-                } 
-                    
-                
-               
+                }
             }
             return dif_dias;
-
-
-                     
-           
         }
 
         public int Diferenca_anos(Data outra)
@@ -276,16 +254,10 @@ namespace Projeto_Presidio
                         dif_anos++;
                         dif_dias = 0;
                     }
-
-
                 }
-
             }
             return dif_anos;
-
         }
-
-       
 
     }
 }
